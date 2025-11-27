@@ -61,21 +61,45 @@ p {
     position: relative;
     color: white;
 }
-#starrail-logo {
-    width: 450px;
-    transition: filter 0.25s ease, transform 0.25s ease;
-    filter:
-        drop-shadow(0 0 6px #7acbff)
-        drop-shadow(0 0 12px #8bb5ff)
-        drop-shadow(0 0 20px #b6a4ff);
+/* Container is fixed near bottom, centered horizontally */
+#logos-wrapper {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+  pointer-events: none;      /* disabled while hidden */
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.45s ease;
 }
 
-#starrail-logo:hover {
-    filter:
-        drop-shadow(0 0 10px #9ce3ff)
-        drop-shadow(0 0 20px #c8bfff)
-        drop-shadow(0 0 35px #ffffff);
-    transform: scale(1.03);
+/* Each link must allow pointer-events when visible */
+.logo-link { pointer-events: auto; display:block; }
+
+/* Base state for images: hidden, slightly moved down */
+.logo-img {
+  width: 220px;               /* adjust size */
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s cubic-bezier(.2,.9,.3,1);
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.4));
+}
+
+/* Visible wrapper + slide-in class */
+#logos-wrapper.visible {
+  pointer-events: auto;       /* enable interaction for contained links */
+  opacity: 1;
+}
+
+/* When wrapper is visible, animate each image to its final state */
+#logos-wrapper.visible .logo-img {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 img.evernight {
@@ -118,6 +142,27 @@ button {
 button:hover {
     background-color: var(--hover-bg-color)
 }
+
+#starrail-logo {
+    margin-left: -10px;
+    margin-top: 32px;
+    margin-bottom: 35px;
+    width: 450px;
+    transition: filter 0.25s ease, transform 0.25s ease;
+    filter:
+        drop-shadow(0 0 6px #7acbff)
+        drop-shadow(0 0 12px #8bb5ff)
+        drop-shadow(0 0 20px #b6a4ff);
+}
+
+#starrail-logo:hover {
+    filter:
+        drop-shadow(0 0 10px #9ce3ff)
+        drop-shadow(0 0 20px #c8bfff)
+        drop-shadow(0 0 35px #ffffff);
+    transform: scale(1.03);
+}
+
 .limbus-img {
     transition: 0.1s ease;
     filter: brightness(1); 
@@ -132,6 +177,25 @@ button:hover {
         drop-shadow(0 0 28px rgba(255, 160, 0, 0.45))  /* soft ambient halo */
         drop-shadow(0 0 48px rgba(255, 140, 0, 0.25)); /* big bloom */
 }
+.uma-glow {
+    margin-left: 10px;
+    margin-bottom: 50px;
+    width: 550px;
+    height: auto;
+    transition: filter 0.25s ease, transform 0.25s ease;
+    filter:
+        drop-shadow(0 0 4px rgba(255, 128, 192, 0.6))    /* soft pink */
+        drop-shadow(0 0 10px rgba(255, 180, 255, 0.4));  /* faint idol glow */
+}
+
+.uma-glow:hover {
+    transform: scale(1.05);
+    filter:
+        drop-shadow(0 0 8px rgba(255, 100, 180, 0.9))     /* strong pink */
+        drop-shadow(0 0 16px rgba(255, 160, 220, 0.7))    /* soft neon aura */
+        drop-shadow(0 0 28px rgba(255, 210, 120, 0.5))    /* warm yellow sparkle */
+        drop-shadow(0 0 40px rgba(255, 230, 200, 0.35));  /* big “idol shine” */
+}
 
 .sticky-footer {
     position: fixed;
@@ -139,6 +203,8 @@ button:hover {
     left: 20px;           /* move this left/right as you want */
     font-size: 18px;
     z-index: 9999;        /* stays above other elements */
+    transition: transform 0.4s ease;
+
     img.credit {
         margin: 10px 10px;
     }
