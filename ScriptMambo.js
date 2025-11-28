@@ -20,10 +20,10 @@ document.getElementById("MamBoButton").addEventListener("click", function () {
 
     // --- Image ---
 const imgsrc = [
-    'Mambo1.jpg',
-    'Mambo2.jpg',
-    'Mambo3.jpg',
-    'Mambo4.jpg'
+    "Mambo1.jpg",
+    "Mambo2.jpg",
+    "Mambo3.jpg",
+    "Mambo4.jpg"
 ];  
     let imgIndex;
     do {
@@ -61,4 +61,3 @@ const imgsrc = [
         setTimeout(() => img.remove(), 300);
     }, 600);
 });
-
