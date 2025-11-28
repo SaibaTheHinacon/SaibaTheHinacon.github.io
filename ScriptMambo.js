@@ -19,8 +19,12 @@ document.getElementById("MamBoButton").addEventListener("click", function () {
     audio.play();
 
     // --- Image ---
-    const imgsrc = ['mambo1.jpg', 'mambo2.jpg', 'mambo3.jpg', 'mambo4.jpg',];
-    
+const imgsrc = [
+    'mambo1.jpg',
+    'mambo2.jpg',
+    'mambo3.jpg',
+    'mambo4.jpg'
+];  
     let imgIndex;
     do {
         imgIndex = Math.floor(Math.random() * imgsrc.length);
